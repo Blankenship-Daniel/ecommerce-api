@@ -7,6 +7,3 @@ class Product(models.Model):
     name = models.CharField(max_length=300)
     description = models.TextField()
     image = models.ImageField(upload_to='product_images')
-
-    def __str__(self):
-        return self.name
