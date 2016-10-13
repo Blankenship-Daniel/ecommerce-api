@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from .serializers import ProductSerializer
+from .serializers import ShoppingCartSerializer
 from .models import ShoppingCart
 
 class JSONResponse(HttpResponse):
@@ -21,12 +21,12 @@ def shopping_cart_list(request):
     """
     if request.method == 'GET':
         shopping_carts = ShoppingCart.objects.all()
-        serializer = ProductSerializer(shopping_carts, many=True)
+        serializer = ShoppingCartSerializer(shopping_carts, many=True)
         return JSONResponse(serializer.data)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = ProductSerializer(data=data)
+        serializer = ShoppingCartSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data, status=201)
@@ -56,4 +56,4 @@ def shopping_cart_detail(request, pk):
 
     elif request.method == 'DELETE':
         shopping_cart.delete()
-        return HttpResponse(status=204) 
+        return HttpResponse(status=204)
