@@ -8,3 +8,6 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images')
     created = models.DateTimeField(auto_now_add=True)
     last_updated_date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name

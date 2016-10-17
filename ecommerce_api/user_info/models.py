@@ -6,8 +6,7 @@ from django.contrib.auth.models import User
 class BillingInfo(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete = models.CASCADE,
-        primary_key = True
+        on_delete = models.CASCADE
     )
     street1 = models.CharField(max_length=100)
     street2 = models.CharField(max_length=100, blank=True)
@@ -18,8 +17,7 @@ class BillingInfo(models.Model):
 class ShippingInfo(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete = models.CASCADE,
-        primary_key = True
+        on_delete = models.CASCADE
     )
     street1 = models.CharField(max_length=100)
     street2 = models.CharField(max_length=100, blank=True)

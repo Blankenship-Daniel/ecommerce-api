@@ -7,12 +7,14 @@ from django.contrib.auth.models import User
 class ShoppingCart(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete = models.CASCADE,
-        primary_key = True
+        on_delete = models.CASCADE
     )
-    products = models.ManyToManyField(Product, through='ShoppingCartProduct')
+    products = models.ManyToManyField(Product)
 
-class ShoppingCartProduct(models.Model):
+    def __unicode__(self):
+        return self.user.username + "'s shopping cart"
+
+class ShoppingCartProductQty(models.Model):
     shopping_cart = models.ForeignKey(ShoppingCart)
     product = models.ForeignKey(Product)
-    qty = models.IntegerField()
+    quantity = models.IntegerField()
